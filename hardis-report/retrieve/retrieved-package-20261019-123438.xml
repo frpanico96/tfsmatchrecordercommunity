@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <types>
+    <members>GamePool__c</members>
+    <members>Game__c</members>
+    <members>MatchResult__c</members>
+    <members>Match__c</members>
+    <members>Player__c</members>
+    <members>Step__c</members>
+    <members>Tournament__c</members>
+    <members>WinConSetup__c</members>
+    <name>CustomTab</name>
+  </types>
+  <version>68.0</version>
+</Package>

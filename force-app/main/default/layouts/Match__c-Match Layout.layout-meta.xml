@@ -24,10 +24,6 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>IsPlayed__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>Player1__c</field>
             </layoutItems>
             <layoutItems>
@@ -37,6 +33,10 @@
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>Status__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>SetWinCondition__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

@@ -1,0 +1,18 @@
+<template>
+    <lightning-card>
+        <lightning-layout vertical-align="center" horizontal-align="center">
+            <lightning-layout-item size="3"></lightning-layout-item>
+            <lightning-layout-item size="6">
+                <div>
+                    <p class="slds-var-p-around_small slds-text-align_center">Paste your match code and Click "Enter"</p>
+                    <lightning-layout padding="around-small" horizontal-align="center">
+                        <lightning-input class="tfs-input" variant="label-hidden" value={matchCode} onchange={handleChange} label="Code"></lightning-input>
+                        <lightning-button label="Enter" variant="brand" onclick={handleClick}></lightning-button>
+                    </lightning-layout>
+                </div>
+            </lightning-layout-item>
+            <lightning-layout-item size="3"></lightning-layout-item>
+        </lightning-layout>
+
+    </lightning-card>
+</template>

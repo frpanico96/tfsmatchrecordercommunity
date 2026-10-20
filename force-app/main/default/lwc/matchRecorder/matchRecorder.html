@@ -1,0 +1,15 @@
+<template>
+    <template lwc:if={loading}>
+        <lightning-layout horizontal-align="center" vertical-align="center">
+            <lightning-spinner variant="brand" size="medium"></lightning-spinner>
+        </lightning-layout>
+    </template>
+    <template lwc:else>
+        <template if:true={isMatchPickerPhase}>
+            <c-match-picker onmatchpicked={advanceToPickBanPhase}></c-match-picker>
+        </template>
+        <template if:true={isPickBanPhase}>
+            <p>PICK BAN PHASE</p>
+        </template>
+    </template>
+</template>

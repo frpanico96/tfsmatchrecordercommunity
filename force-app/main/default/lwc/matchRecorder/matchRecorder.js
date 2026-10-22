@@ -15,7 +15,7 @@ export default class MatchRecorder extends LightningElement {
     isClosingPhase;
 
     loading;
-    matchId;
+    matchObj;
 
     connectedCallback(){
         this.loading = true;
@@ -30,12 +30,13 @@ export default class MatchRecorder extends LightningElement {
         await this.load();
         
         const matchCode = evt.detail.matchCode
-        this.matchId = await getMatchToRecord({matchCode});
-        
-        if(this.matchId !== "NO RECORD FOUND"){
+        this.matchObj = await getMatchToRecord({matchCode});
+        console.log(this.matchObj);
+        if(this.matchObj){
             await this.load();
             this.isPickBanPhase = true;
         }
+
     }
 
     async load(){

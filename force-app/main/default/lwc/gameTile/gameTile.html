@@ -1,0 +1,8 @@
+<template>
+    <template lwc:if={isTile}>
+        <lightning-card title={gameObj.gameName}></lightning-card>
+    </template>
+    <template lwc:elseif={isBtn}>
+        <lightning-button variant="neutral" label={gameObj.gameName} value={gameObj.gameId} onclick={handleClick}></lightning-button>
+    </template>
+</template>

@@ -1,0 +1,7 @@
+<template>
+    <h1 class="slds-var-p-around_small">{playerGameObj.name}</h1>
+    <h2 class="slds-var-p-around_small">Pick</h2>
+    <c-game-pool game-pool={playerGameObj.picks} mode="tile"></c-game-pool>
+    <h2 class="slds-var-p-around_small">Ban</h2>
+    <c-game-pool game-pool={playerGameObj.bans} mode="tile"></c-game-pool>
+</template>

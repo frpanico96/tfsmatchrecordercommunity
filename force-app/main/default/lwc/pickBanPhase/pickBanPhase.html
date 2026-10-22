@@ -1,0 +1,14 @@
+<template>
+    <lightning-layout vertical-align="center" horizontal-align="center">
+        <lightning-layout-item size="3">
+            <c-player-section player-game-obj={p1}></c-player-section>
+        </lightning-layout-item>
+        <lightning-layout-item size="6">
+            <h1 class="slds-text-align_center slds-var-p-around_small">{stepTitle}</h1>
+            <c-game-pool game-pool={gamePool} ongameselected={onGameSelected} mode="btn"></c-game-pool>
+        </lightning-layout-item>
+        <lightning-layout-item size="3">
+            <c-player-section player-game-obj={p2}></c-player-section>
+        </lightning-layout-item>
+    </lightning-layout>
+</template>

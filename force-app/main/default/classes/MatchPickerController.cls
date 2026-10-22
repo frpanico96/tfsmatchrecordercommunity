@@ -2,9 +2,9 @@ public with sharing class MatchPickerController {
 
 
     @AuraEnabled
-    public static string getMatchToRecord(String matchCode){
+    public static TfsDto.MatchPickerDto getMatchToRecord(String matchCode){
         try {
-            return MatchUtils.getMatchByCode(matchCode);
+            return MatchPickerUtils.getMatchDto(matchCode);
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }

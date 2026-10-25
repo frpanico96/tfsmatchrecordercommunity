@@ -4,6 +4,7 @@ export default class GameTile extends LightningElement {
 
     @api mode;
     @api gameObj;
+    @api btnDisabled = false;
 
     get isTile(){
         return this.mode === 'tile'

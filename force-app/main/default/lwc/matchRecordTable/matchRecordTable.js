@@ -1,8 +1,9 @@
 import { LightningElement, track, api } from 'lwc';
 
 import getMatchesToRecord from '@salesforce/apex/MatchRecordTableController.getMatchesToRecord';
+import saveMatchReport from '@salesforce/apex/MatchRecordTableController.saveMatchReport';
 
-const matchResultsCol = [
+const MATCH_RESULT_COL = [
     {
         label: 'Set',
         type: 'number',
@@ -47,7 +48,11 @@ const matchResultsCol = [
 export default class MatchRecordTable extends LightningElement {
 
     @api matchId;
+
     @track cardTitle;
+    @track matchResults;
+    @track draftValues;
+    @track matchResultsCol;
 
     isLoading;
 
@@ -56,11 +61,26 @@ export default class MatchRecordTable extends LightningElement {
 
     async connectedCallback(){
         this.isLoading = true;
+        this.matchResultsCol = [...MATCH_RESULT_COL];
         console.log(this.matchId)
 
         const matchesToRecord = await getMatchesToRecord({matchId: this.matchId});
 
         console.log(JSON.stringify(matchesToRecord));
+        this.cardTitle = `${matchesToRecord.matchName}: ${matchesToRecord.p1Name} vs ${matchesToRecord.p2Name}`;
+        this.matchResults = [...matchesToRecord.tableData];
+        
+        this.isLoading = false;
+    }
 
+    async handleSave(evt){
+        evt.preventDefault();
+        console.log('Saving event');
+        console.log(JSON.stringify(evt.detail.draftValues));
+        const payload = JSON.stringify(evt.detail.draftValues);
+        const success = await saveMatchReport({payload, matchId: this.matchId});
+        console.log(payload, success);
+        this.isLoading = true;
+        this.dispatchEvent(new CustomEvent('reportcomplete', {}));
     }
 }

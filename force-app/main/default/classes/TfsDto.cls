@@ -30,6 +30,10 @@ public with sharing class TfsDto {
     public class MatchRecordDto {
 
         @AuraEnabled
+        public String matchName;
+        @AuraEnabled
+        public String matchId;
+        @AuraEnabled
         public String p1Name;
         @AuraEnabled
         public String p2Name;
@@ -41,11 +45,21 @@ public with sharing class TfsDto {
     public class MatchRecordTableDataDto {
 
         @AuraEnabled
+        public String id;
+        @AuraEnabled
         public Integer setnum;
         @AuraEnabled
         public String game;
         @AuraEnabled
         public String wincon;
+        @AuraEnabled
+        public Integer p1score;
+        @AuraEnabled
+        public Integer p2score;        
+        @AuraEnabled
+        public Boolean dqp1;
+        @AuraEnabled
+        public Boolean dqp2;
 
     }
 
@@ -70,6 +84,8 @@ public with sharing class TfsDto {
         public String winCon;
         @AuraEnabled
         public String setWinCon;
+        @AuraEnabled
+        public String status;
     }
 
     public class GamePoolDto{

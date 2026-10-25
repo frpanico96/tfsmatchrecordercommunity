@@ -6,10 +6,19 @@ public with sharing class MatchRecordTableController {
         try {   
             return MatchRecordTableUtils.getMatchResultsForTable(matchId);
         } catch (Exception e) {
-            LogService.insertTrace('Error Get Match Results', Constants.MATCH_RECORD_PHASE, Constants.STATUS_ERROR, e.getMessage());
+            LogService.insertTrace(Constants.MATCH_RECORD_PHASE, matchId, Constants.STATUS_ERROR, e.getMessage());
         }
         return null;
     }
 
+    @AuraEnabled
+    public static Boolean saveMatchReport(String payload, String matchId){
+        try {
+            return MatchRecordTableUtils.saveMatchReport(payload, matchId);
+        } catch (Exception e) {
+            LogService.insertTrace(Constants.MATCH_RECORD_PHASE, matchId, Constants.STATUS_ERROR, e.getMessage());
+            return false;
+        }
+    }
 
 }

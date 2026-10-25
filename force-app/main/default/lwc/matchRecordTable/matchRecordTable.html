@@ -4,7 +4,13 @@
     </template>
     <template lwc:else>
         <lightning-card title={cardTitle}>
-            <lightning-datatable key-field="id" data={matchResults} columns={matchResultsCol} draft-values={draftValues}>
+            <lightning-datatable 
+                key-field="id" 
+                data={matchResults} 
+                columns={matchResultsCol} 
+                draft-values={draftValues}
+                onsave={handleSave}
+                hide-checkbox-column="true">
             </lightning-datatable>
         </lightning-card>
     </template>

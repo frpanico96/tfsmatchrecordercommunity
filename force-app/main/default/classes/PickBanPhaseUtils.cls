@@ -1,4 +1,4 @@
-public with sharing class PickBanPhaseUtils {
+public without sharing class PickBanPhaseUtils {
 
 
     public static List<String> getWinCon(String winCon){

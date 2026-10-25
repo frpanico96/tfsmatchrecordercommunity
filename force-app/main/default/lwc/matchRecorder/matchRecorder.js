@@ -34,6 +34,17 @@ export default class MatchRecorder extends LightningElement {
         console.log(this.matchObj);
         if(this.matchObj){
             await this.load();
+
+            if(this.matchObj.match.status === 'Ready'){
+                this.advanceToMatchRecordPhase();
+                return;
+            }
+
+            if(this.matchObj.match.status === 'Played'){
+                await this.advanceToClosingPhase();
+                return;
+            }
+
             this.isPickBanPhase = true;
         }
 
@@ -44,6 +55,12 @@ export default class MatchRecorder extends LightningElement {
         this.isPickBanPhase = false;
         this.isMatchReportPhase = true;
 
+    }
+
+   async advanceToClosingPhase(evt){
+        this.isMatchReportPhase = false;
+        await this.load();
+        this.isClosingPhase = true;
     }
 
     async load(){

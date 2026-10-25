@@ -4,5 +4,6 @@ export default class GamePool extends LightningElement {
 
     @api mode;
     @api gamePool;
+    @api btnDisabled = false;
 
 }

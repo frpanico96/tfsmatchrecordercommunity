@@ -14,6 +14,7 @@ public with sharing class MatchPickerUtils {
         result.match.matchName = match.Name;
         result.match.setWinCon = match.SetWinCondition__c;
         result.match.winCon = match.WinCondition__c;
+        result.match.status = match.Status__c;
 
         /* P1P2 DTO */
         result.p1 = new TfsDto.PlayerDto();

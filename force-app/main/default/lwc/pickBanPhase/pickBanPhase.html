@@ -8,9 +8,9 @@
                 <c-player-section player-game-obj={p1}></c-player-section>
             </lightning-layout-item>
             <lightning-layout-item size="6">
-                <h1 class="step-title slds-text-align_center slds-var-p-around_small">{stepTitle}<span class={stepTitleClass}>{currentStep}</span><span>{closingStepTitle}</span></h1>
+                <h1 class="step-title slds-text-align_center slds-var-p-around_small">{stepTitle}<span class={stepTitleClass}>{stepType}</span><span>{closingStepTitle}</span></h1>
                 <template lwc:if={pickBanPhase}>
-                    <c-game-pool game-pool={gamePool} ongameselected={onGameSelected} mode={gamePoolMode}></c-game-pool>
+                    <c-game-pool btn-disabled={btnDisabled} game-pool={gamePool} ongameselected={onGameSelected} mode={gamePoolMode}></c-game-pool>
                 </template>
                 <template lwc:else>
                     <lightning-layout horizontal-align="center" vertical-align="center" class="slds-grid slds-wrap">

@@ -2,7 +2,7 @@
     <lightning-layout padding="around-small" vertical-align="center" horizontal-align="center" class="slds-grid slds-wrap">
         <template for:each={gamePool} for:item="game">
             <lightning-layout-item class="slds-col slds-size_12-of-12 slds-var-p-around_xx-small" key={game.gameId}>
-                <c-game-tile mode={mode} game-obj={game}></c-game-tile>
+                <c-game-tile btn-disabled={btnDisabled} mode={mode} game-obj={game}></c-game-tile>
             </lightning-layout-item>
         </template>
     </lightning-layout>

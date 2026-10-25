@@ -1,8 +1,8 @@
 import { LightningElement, api, track } from 'lwc';
-import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import getWinConSetup from '@salesforce/apex/PickBanPhaseController.getWinConSetup';
 import recordPickBanPhase from '@salesforce/apex/PickBanPhaseController.recordPickBanPhase';
+import tracePickBanPhase from '@salesforce/apex/PickBanPhaseController.tracePickBanPhase';
 
 const STEP_TITLE_BASE_CLASS = 'step-title slds-text-align_center slds-var-p-around_small';
 
@@ -35,6 +35,8 @@ export default class PickBanPhase extends LightningElement {
     currentStep;
     isP1Turn = false;
     stepTitle;
+    stepType;
+    btnDisabled = false;
     pickBanPhase = true;
     closingStepTitle = ' a game:';
     confirmBtnDisabled = false;
@@ -70,13 +72,15 @@ export default class PickBanPhase extends LightningElement {
         this.goToNextStep();
     }
 
-    goToNextStep(){
+    async goToNextStep(){
         this.currentStep = this.winCon.shift();
         
         if(this.currentStep === 'DECIDER'){
-            this.pickDecider();
+            this.btnDisabled = true;
+            await this.pickDecider();
             return;
         }
+        this.stepType = this.currentStep;
         this.stepTitleClass = `${this.currentStep === 'BAN' ? 'ban-style' : 'pick-style'}`;
         this.stepTitle = this.currentPlayer + ' has to ';
 
@@ -103,11 +107,16 @@ export default class PickBanPhase extends LightningElement {
         this.switchTurn();
     }
 
-    pickDecider(){
+    async pickDecider(){
         const randomIndex = Math.floor(Math.random()* this.gamePool.length);
         this.deciderGame = {...this.gamePool[randomIndex]};
+
+        const payload = this.buildPickBanResult();
+        await tracePickBanPhase({pickBanPayload: JSON.stringify(payload), matchId: this.matchObj.match.matchId});
+
         this.stepTitle = '';
         this.stepTitleClass = 'pick-style';
+        this.stepType = this.currentStep;
         this.closingStepTitle = ':';
         this.pickBanPhase = false;
     }

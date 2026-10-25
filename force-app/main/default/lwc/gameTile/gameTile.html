@@ -4,7 +4,7 @@
     </template>
     <template lwc:elseif={isBtn}>
         <div class="slds-align_absolute-center">
-            <lightning-button style="width: 300px" stretch variant="neutral" label={gameObj.gameName} value={gameObj.gameId} onclick={handleClick}></lightning-button>
+            <lightning-button disabled={btnDisabled} style="width: 300px" stretch variant="neutral" label={gameObj.gameName} value={gameObj.gameId} onclick={handleClick}></lightning-button>
         </div>
     </template>
 </template>

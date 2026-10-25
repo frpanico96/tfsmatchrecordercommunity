@@ -5,12 +5,12 @@ export default class GameTile extends LightningElement {
     @api mode;
     @api gameObj;
 
-    isTile = false;
-    isBtn = false;
+    get isTile(){
+        return this.mode === 'tile'
+    }
 
-    connectedCallback(){
-        this.isTile = this.mode === 'tile';
-        this.isBtn = this.mode === 'btn';
+    get isBtn() {
+        return this.mode === 'btn'
     }
 
     handleClick(evt){

@@ -1,7 +1,15 @@
 <template>
-    <h1 class="slds-var-p-around_small">{playerGameObj.name}</h1>
-    <h2 class="slds-var-p-around_small">Pick</h2>
-    <c-game-pool game-pool={playerGameObj.picks} mode="tile"></c-game-pool>
-    <h2 class="slds-var-p-around_small">Ban</h2>
-    <c-game-pool game-pool={playerGameObj.bans} mode="tile"></c-game-pool>
+    <lightning-layout vertical-align="start" horizontal-align="spread" multiple-rows="true">
+        <lightning-layout-item size="12">
+            <h1 class="player-header slds-align-top slds-var-p-around_small">{playerGameObj.name}</h1>
+        </lightning-layout-item>
+        <lightning-layout-item size="12">
+            <h2 class="pick-header slds-var-p-around_small">Picks</h2>
+            <c-game-pool game-pool={playerGameObj.picks} mode="tile"></c-game-pool>
+        </lightning-layout-item>
+        <lightning-layout-item size="12">
+            <h2 class="ban-header slds-var-p-around_small">Bans</h2>
+            <c-game-pool game-pool={playerGameObj.bans} mode="tile"></c-game-pool>
+        </lightning-layout-item>
+    </lightning-layout>
 </template>

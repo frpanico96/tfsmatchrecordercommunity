@@ -39,6 +39,13 @@ export default class MatchRecorder extends LightningElement {
 
     }
 
+    advanceToMatchRecordPhase(evt){
+        console.log('Advancing to match report phase');
+        this.isPickBanPhase = false;
+        this.isMatchReportPhase = true;
+
+    }
+
     async load(){
         this.loading = true;
         await this.wait(LOAD_TIME_MS);

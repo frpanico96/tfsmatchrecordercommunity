@@ -1,14 +1,31 @@
 <template>
-    <lightning-layout vertical-align="center" horizontal-align="center">
-        <lightning-layout-item size="3">
-            <c-player-section player-game-obj={p1}></c-player-section>
-        </lightning-layout-item>
-        <lightning-layout-item size="6">
-            <h1 class="slds-text-align_center slds-var-p-around_small">{stepTitle}</h1>
-            <c-game-pool game-pool={gamePool} ongameselected={onGameSelected} mode="btn"></c-game-pool>
-        </lightning-layout-item>
-        <lightning-layout-item size="3">
-            <c-player-section player-game-obj={p2}></c-player-section>
-        </lightning-layout-item>
-    </lightning-layout>
+    <template lwc:if={isLoading}>
+        <lightning-spinner size="medium" variant="brand" alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <template lwc:else>
+        <lightning-layout vertical-align="center" horizontal-align="center">
+            <lightning-layout-item size="3">
+                <c-player-section player-game-obj={p1}></c-player-section>
+            </lightning-layout-item>
+            <lightning-layout-item size="6">
+                <h1 class="step-title slds-text-align_center slds-var-p-around_small">{stepTitle}<span class={stepTitleClass}>{currentStep}</span><span>{closingStepTitle}</span></h1>
+                <template lwc:if={pickBanPhase}>
+                    <c-game-pool game-pool={gamePool} ongameselected={onGameSelected} mode={gamePoolMode}></c-game-pool>
+                </template>
+                <template lwc:else>
+                    <lightning-layout horizontal-align="center" vertical-align="center" class="slds-grid slds-wrap">
+                        <lightning-layout-item class="slds-var-p-around_small slds-col slds-size_12-of-12">
+                            <p class="step-title slds-align_absolute-center decider-game slds-var-p-around_xx-small">{deciderGame.gameName}</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item class="slds-var-p-around_small slds-col slds-size_12-of-12">
+                            <lightning-button disabled={confirmBtnDisabled} class="slds-var-p-around_small slds-align_absolute-center" label="Confirm" onclick={confirmPickBan}></lightning-button>
+                        </lightning-layout-item>
+                    </lightning-layout>
+                </template>
+            </lightning-layout-item>
+            <lightning-layout-item size="3">
+                <c-player-section player-game-obj={p2}></c-player-section>
+            </lightning-layout-item>
+        </lightning-layout>
+    </template>
 </template>

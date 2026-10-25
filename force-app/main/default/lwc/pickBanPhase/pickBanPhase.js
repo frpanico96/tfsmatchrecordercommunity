@@ -1,6 +1,10 @@
 import { LightningElement, api, track } from 'lwc';
+import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import getWinConSetup from '@salesforce/apex/PickBanPhaseController.getWinConSetup';
+import recordPickBanPhase from '@salesforce/apex/PickBanPhaseController.recordPickBanPhase';
+
+const STEP_TITLE_BASE_CLASS = 'step-title slds-text-align_center slds-var-p-around_small';
 
 export default class PickBanPhase extends LightningElement {
 
@@ -22,13 +26,23 @@ export default class PickBanPhase extends LightningElement {
 
     @track gamePool = [];
     @track winCon = [];
+    @track gamePoolMode = 'btn';
+    @track deciderGame = {}
+    @track stepTitleClass = STEP_TITLE_BASE_CLASS;
 
+    isLoading;
     currentPlayer;
     currentStep;
     isP1Turn = false;
     stepTitle;
+    pickBanPhase = true;
+    closingStepTitle = ' a game:';
+    confirmBtnDisabled = false;
+    
 
     async connectedCallback(){
+
+        this.isLoading = true;
 
         if(!this.matchObj){
             console.error('Match Obj null');
@@ -42,6 +56,7 @@ export default class PickBanPhase extends LightningElement {
 
         this.switchTurn();
 
+        this.isLoading = false;
     }
 
     switchTurn(){
@@ -57,7 +72,13 @@ export default class PickBanPhase extends LightningElement {
 
     goToNextStep(){
         this.currentStep = this.winCon.shift();
-        this.stepTitle = this.currentPlayer + ' have to ' + this.currentStep + ' a game';
+        
+        if(this.currentStep === 'DECIDER'){
+            this.pickDecider();
+            return;
+        }
+        this.stepTitleClass = `${this.currentStep === 'BAN' ? 'ban-style' : 'pick-style'}`;
+        this.stepTitle = this.currentPlayer + ' has to ';
 
     }
 
@@ -80,6 +101,58 @@ export default class PickBanPhase extends LightningElement {
         }
 
         this.switchTurn();
+    }
+
+    pickDecider(){
+        const randomIndex = Math.floor(Math.random()* this.gamePool.length);
+        this.deciderGame = {...this.gamePool[randomIndex]};
+        this.stepTitle = '';
+        this.stepTitleClass = 'pick-style';
+        this.closingStepTitle = ':';
+        this.pickBanPhase = false;
+    }
+
+    async confirmPickBan(evt){
+        evt.preventDefault();
+        
+        this.confirmBtnDisabled = true;
+
+        this.isLoading = true;
+        
+        const payload = this.buildPickBanResult();
+
+        const success = await recordPickBanPhase({pickBanResult: JSON.stringify(payload)});
+
+        console.log(payload, success);
+
+        if(success){
+            console.log('firing success event');
+            this.dispatchEvent(new CustomEvent('pickbancompleted', {}));
+        } else {
+            console.error('error in creating matches to record');
+        }
+
+    }
+
+    buildPickBanResult(){
+
+        const result = {
+            p1: {
+                player: {...this.matchObj.p1},
+                picks: [...this.p1.picks],
+                bans: [...this.p1.bans],
+            },
+            p2: {
+                player: {...this.matchObj.p2},
+                picks: [...this.p2.picks],
+                bans: [...this.p2.bans],
+            },
+            decider: {...this.deciderGame},
+            match: {...this.matchObj.match}
+        }
+
+        return result;
+
     }
 
 }

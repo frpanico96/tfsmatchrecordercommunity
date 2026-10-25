@@ -3,6 +3,8 @@
         <lightning-card title={gameObj.gameName}></lightning-card>
     </template>
     <template lwc:elseif={isBtn}>
-        <lightning-button variant="neutral" label={gameObj.gameName} value={gameObj.gameId} onclick={handleClick}></lightning-button>
+        <div class="slds-align_absolute-center">
+            <lightning-button style="width: 300px" stretch variant="neutral" label={gameObj.gameName} value={gameObj.gameId} onclick={handleClick}></lightning-button>
+        </div>
     </template>
 </template>

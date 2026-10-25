@@ -1,7 +1,7 @@
 <template>
     <template lwc:if={loading}>
         <lightning-layout horizontal-align="center" vertical-align="center">
-            <lightning-spinner variant="brand" size="medium"></lightning-spinner>
+            <lightning-spinner variant="brand" size="medium" alternative-text="Loading..."></lightning-spinner>
         </lightning-layout>
     </template>
     <template lwc:else>
@@ -9,7 +9,10 @@
             <c-match-picker onmatchpicked={advanceToPickBanPhase}></c-match-picker>
         </template>
         <template lwc:elseif={isPickBanPhase}>
-            <c-pick-ban-phase match-obj={matchObj}></c-pick-ban-phase>
+            <c-pick-ban-phase match-obj={matchObj} onpickbancompleted={advanceToMatchRecordPhase}></c-pick-ban-phase>
+        </template>
+        <template lwc:elseif={isMatchReportPhase}>
+            <c-match-record-table match-id={matchObj.match.matchId}></c-match-record-table>
         </template>
     </template>
 </template>

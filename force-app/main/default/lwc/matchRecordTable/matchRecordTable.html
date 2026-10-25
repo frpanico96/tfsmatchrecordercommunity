@@ -1,0 +1,11 @@
+<template>
+    <template lwc:if={isLoading}>
+        <lightning-spinner variant="brand" size="medium" alternative-text="Loading..."></lightning-spinner>
+    </template>
+    <template lwc:else>
+        <lightning-card title={cardTitle}>
+            <lightning-datatable key-field="id" data={matchResults} columns={matchResultsCol} draft-values={draftValues}>
+            </lightning-datatable>
+        </lightning-card>
+    </template>
+</template>

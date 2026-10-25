@@ -14,6 +14,53 @@ public with sharing class TfsDto {
         public PlayerDto p2;
     }
 
+    public class PickBanResultDto {
+
+        @AuraEnabled
+        public PickBanPlayerDto p1;
+        @AuraEnabled
+        public PickBanPlayerDto p2;
+        @AuraEnabled
+        public GamePoolDto decider;
+        @AuraEnabled
+        public MatchDto match;
+        
+    }
+
+    public class MatchRecordDto {
+
+        @AuraEnabled
+        public String p1Name;
+        @AuraEnabled
+        public String p2Name;
+        @AuraEnabled
+        public List<MatchRecordTableDataDto> tableData;
+        
+    }
+
+    public class MatchRecordTableDataDto {
+
+        @AuraEnabled
+        public Integer setnum;
+        @AuraEnabled
+        public String game;
+        @AuraEnabled
+        public String wincon;
+
+    }
+
+
+    public class PickBanPlayerDto{
+
+        @AuraEnabled
+        public PlayerDto player;
+        @AuraEnabled
+        public List<GamePoolDto> picks;
+        @AuraEnabled
+        public List<GamePoolDto> bans;
+
+    }
+
     public class MatchDto{
         @AuraEnabled
         public String matchId;
@@ -38,6 +85,5 @@ public with sharing class TfsDto {
         @AuraEnabled
         public String playerName;
     }
-
 
 }

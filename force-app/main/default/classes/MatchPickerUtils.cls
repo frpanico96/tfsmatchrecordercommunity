@@ -77,6 +77,7 @@ public with sharing class MatchPickerUtils {
                 Game__c
                 FROM GamePool__c
                 WHERE Tournament__c = :torunamentId
+                ORDER BY Order__c ASC
             ]);
 
         if(securityDecision.getRecords().size() > 0){

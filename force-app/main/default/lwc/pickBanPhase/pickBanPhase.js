@@ -39,6 +39,7 @@ export default class PickBanPhase extends LightningElement {
     btnDisabled = false;
     pickBanPhase = true;
     closingStepTitle = ' a game:';
+    recordPickBanSuccess = false;
     confirmBtnDisabled = false;
     
 
@@ -112,8 +113,8 @@ export default class PickBanPhase extends LightningElement {
         this.deciderGame = {...this.gamePool[randomIndex]};
 
         const payload = this.buildPickBanResult();
-        await tracePickBanPhase({pickBanPayload: JSON.stringify(payload), matchId: this.matchObj.match.matchId});
-
+        await tracePickBanPhase({pickBanPayload: payload, matchId: this.matchObj.match.matchId});
+        this.recordPickBanSuccess = await recordPickBanPhase({pickBanResult: payload});
         this.stepTitle = '';
         this.stepTitleClass = 'pick-style';
         this.stepType = this.currentStep;
@@ -127,19 +128,22 @@ export default class PickBanPhase extends LightningElement {
         this.confirmBtnDisabled = true;
 
         this.isLoading = true;
+
+        // const payload = this.buildPickBanResult();
+
+        // const success = await recordPickBanPhase({pickBanResult: JSON.stringify(payload)});
+
+        // console.log(payload, success);
         
-        const payload = this.buildPickBanResult();
+        console.log('firing success event');
+        this.dispatchEvent(new CustomEvent('pickbancompleted', {}));
 
-        const success = await recordPickBanPhase({pickBanResult: JSON.stringify(payload)});
-
-        console.log(payload, success);
-
-        if(success){
-            console.log('firing success event');
-            this.dispatchEvent(new CustomEvent('pickbancompleted', {}));
+        if(!this.recordPickBanSuccess){
+            const payload = this.buildPickBanResult();
+            await recordPickBanPhase({pickBanResult: payload});
         } else {
-            console.error('error in creating matches to record');
-        }
+             console.error('error in creating matches to record');
+         }
 
     }
 
@@ -160,7 +164,7 @@ export default class PickBanPhase extends LightningElement {
             match: {...this.matchObj.match}
         }
 
-        return result;
+        return JSON.stringify(result);
 
     }
 

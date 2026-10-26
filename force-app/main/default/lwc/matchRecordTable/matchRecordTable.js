@@ -77,7 +77,22 @@ export default class MatchRecordTable extends LightningElement {
         evt.preventDefault();
         console.log('Saving event');
         console.log(JSON.stringify(evt.detail.draftValues));
-        const payload = JSON.stringify(evt.detail.draftValues);
+
+        const payloadArr = evt.detail.draftValues.map(el => {
+            
+            const newEl = {...el};
+            
+            if(newEl.p1score === ""){
+                newEl.p1score = null;
+            }
+            if(newEl.p2score === ""){
+                newEl.p2score = null;
+            }
+
+            return newEl;
+        });
+
+        const payload = JSON.stringify(payloadArr);
         const success = await saveMatchReport({payload, matchId: this.matchId});
         console.log(payload, success);
         this.isLoading = true;

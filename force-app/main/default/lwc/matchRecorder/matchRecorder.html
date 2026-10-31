@@ -1,0 +1,26 @@
+<template>
+    <template lwc:if={isRecorderActive}>
+        <template lwc:if={loading}>
+            <lightning-layout horizontal-align="center" vertical-align="center">
+                <lightning-spinner variant="brand" size="medium" alternative-text="Loading..."></lightning-spinner>
+            </lightning-layout>
+        </template>
+        <template lwc:else>
+            <template lwc:if={isMatchPickerPhase}>
+                <c-match-picker onmatchpicked={advanceToPickBanPhase}></c-match-picker>
+            </template>
+            <template lwc:elseif={isPickBanPhase}>
+                <c-pick-ban-phase match-obj={matchObj} onpickbancompleted={advanceToMatchRecordPhase}></c-pick-ban-phase>
+            </template>
+            <template lwc:elseif={isMatchReportPhase}>
+                <c-match-record-table match-id={matchObj.match.matchId} onreportcomplete={advanceToClosingPhase}></c-match-record-table>
+            </template>
+            <template lwc:elseif={isClosingPhase}>
+                <c-success-screen></c-success-screen>
+            </template>
+        </template>
+    </template>
+    <template lwc:else>
+        <h1 class="slds-align_absolute-center">System is under mantainance. Please contact Tournament's organizers for further information</h1>
+    </template>
+</template>

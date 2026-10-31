@@ -7,7 +7,7 @@
         <label>Information</label>
         <layoutColumns>
             <layoutItems>
-                <behavior>Required</behavior>
+                <behavior>Readonly</behavior>
                 <field>Name</field>
             </layoutItems>
             <layoutItems>
@@ -17,6 +17,10 @@
             <layoutItems>
                 <behavior>Required</behavior>
                 <field>Game__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Order__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns/>

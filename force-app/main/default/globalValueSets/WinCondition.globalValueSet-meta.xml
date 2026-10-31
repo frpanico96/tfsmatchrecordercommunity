@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GlobalValueSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customValue>
+        <fullName>FT1</fullName>
+        <default>false</default>
+        <label>FT1</label>
+    </customValue>
+    <customValue>
+        <fullName>FT2</fullName>
+        <default>false</default>
+        <label>FT2</label>
+    </customValue>
+    <customValue>
+        <fullName>FT3</fullName>
+        <default>false</default>
+        <label>FT3</label>
+    </customValue>
+    <customValue>
+        <fullName>FT5</fullName>
+        <default>false</default>
+        <label>FT5</label>
+    </customValue>
+    <customValue>
+        <fullName>FT7</fullName>
+        <default>false</default>
+        <label>FT7</label>
+    </customValue>
+    <customValue>
+        <fullName>FT10</fullName>
+        <default>false</default>
+        <label>FT10</label>
+    </customValue>
+    <masterLabel>Win Condition</masterLabel>
+    <sorted>false</sorted>
+</GlobalValueSet>

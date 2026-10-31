@@ -1,0 +1,13 @@
+.player-header{
+    font-weight: bold;
+}
+
+.pick-header{
+    font-weight: bold;
+    color:rgb(148, 196, 101);
+}
+
+.ban-header{
+    font-weight: bold;
+    color: red;
+}

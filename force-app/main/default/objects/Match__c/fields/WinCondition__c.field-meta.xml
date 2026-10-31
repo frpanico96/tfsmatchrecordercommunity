@@ -7,38 +7,6 @@
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetDefinition>
-            <sorted>false</sorted>
-            <value>
-                <fullName>FT1</fullName>
-                <default>false</default>
-                <label>FT1</label>
-            </value>
-            <value>
-                <fullName>FT2</fullName>
-                <default>false</default>
-                <label>FT2</label>
-            </value>
-            <value>
-                <fullName>FT3</fullName>
-                <default>false</default>
-                <label>FT3</label>
-            </value>
-            <value>
-                <fullName>FT5</fullName>
-                <default>false</default>
-                <label>FT5</label>
-            </value>
-            <value>
-                <fullName>FT7</fullName>
-                <default>false</default>
-                <label>FT7</label>
-            </value>
-            <value>
-                <fullName>FT10</fullName>
-                <default>false</default>
-                <label>FT10</label>
-            </value>
-        </valueSetDefinition>
+        <valueSetName>WinCondition</valueSetName>
     </valueSet>
 </CustomField>

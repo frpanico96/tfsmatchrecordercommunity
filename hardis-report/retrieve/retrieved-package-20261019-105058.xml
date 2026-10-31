@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+  <types>
+    <members>Match__c.Status__c</members>
+    <members>Match__c.WinCondition__c</members>
+    <members>WinConSetup__c.Setup__c</members>
+    <members>WinConSetup__c.WinCondition__c</members>
+    <name>CustomField</name>
+  </types>
+  <types>
+    <members>WinConSetup__c</members>
+    <name>CustomObject</name>
+  </types>
+  <types>
+    <members>WinCondition</members>
+    <name>GlobalValueSet</name>
+  </types>
+  <types>
+    <members>Match__c-Match Layout</members>
+    <members>WinConSetup__c-Win Con Setup Layout</members>
+    <name>Layout</name>
+  </types>
+  <version>68.0</version>
+</Package>

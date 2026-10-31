@@ -93,6 +93,8 @@ public with sharing class TfsDto {
         public String gameId;
         @AuraEnabled
         public String gameName;
+        @AuraEnabled
+        public String gameSpecialRules;
     }
 
     public class PlayerDto{

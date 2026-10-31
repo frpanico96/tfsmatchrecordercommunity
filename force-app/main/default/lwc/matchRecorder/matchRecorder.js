@@ -1,11 +1,14 @@
 import { LightningElement } from 'lwc';
 
+import isRecorderActive from '@salesforce/apex/MatchPickerController.isRecorderActive';
 import getMatchToRecord from '@salesforce/apex/MatchPickerController.getMatchToRecord';
 
 
 const LOAD_TIME_MS = 1000;
 
 export default class MatchRecorder extends LightningElement {
+
+    isRecorderActive = true;
 
     isMatchPickerPhase;
     isPickBanPhase;
@@ -17,9 +20,10 @@ export default class MatchRecorder extends LightningElement {
     loading;
     matchObj;
 
-    connectedCallback(){
+    async connectedCallback(){
         this.loading = true;
-        this.load();
+        this.isRecorderActive = await isRecorderActive();
+        await this.load();
         this.isMatchPickerPhase = true;
     }
 
@@ -28,6 +32,7 @@ export default class MatchRecorder extends LightningElement {
         this.isMatchPickerPhase = false;
         
         await this.load();
+        this.isRecorderActive = await isRecorderActive();
         
         const matchCode = evt.detail.matchCode
         this.matchObj = await getMatchToRecord({matchCode});
@@ -50,8 +55,9 @@ export default class MatchRecorder extends LightningElement {
 
     }
 
-    advanceToMatchRecordPhase(evt){
+    async advanceToMatchRecordPhase(evt){
         console.log('Advancing to match report phase');
+        this.isRecorderActive = await isRecorderActive();
         this.isPickBanPhase = false;
         this.isMatchReportPhase = true;
 
@@ -59,6 +65,7 @@ export default class MatchRecorder extends LightningElement {
 
    async advanceToClosingPhase(evt){
         this.isMatchReportPhase = false;
+        this.isRecorderActive = await isRecorderActive();
         await this.load();
         this.isClosingPhase = true;
     }

@@ -29,6 +29,7 @@ export default class PickBanPhase extends LightningElement {
     @track gamePoolMode = 'btn';
     @track deciderGame = {}
     @track stepTitleClass = STEP_TITLE_BASE_CLASS;
+    @track specialRules = [];
 
     isLoading;
     currentPlayer;
@@ -41,6 +42,7 @@ export default class PickBanPhase extends LightningElement {
     closingStepTitle = ' a game:';
     recordPickBanSuccess = false;
     confirmBtnDisabled = false;
+    showSpecialRules = false;
     
 
     async connectedCallback(){
@@ -89,6 +91,12 @@ export default class PickBanPhase extends LightningElement {
 
     onGameSelected(evt){
         const gameSelected = evt.detail.game;
+        if(gameSelected.gameSpecialRules){
+            this.specialRules.push({
+                name: gameSelected.gameName,
+                rule: gameSelected.gameSpecialRules,
+            });
+        }
         const gameSelectedIndex = this.gamePool.findIndex(game => game.gameId === gameSelected.gameId);
         this.gamePool.splice(gameSelectedIndex, 1);
         if(this.isP1Turn){
@@ -111,10 +119,16 @@ export default class PickBanPhase extends LightningElement {
     async pickDecider(){
         const randomIndex = Math.floor(Math.random()* this.gamePool.length);
         this.deciderGame = {...this.gamePool[randomIndex]};
-
+        if(this.deciderGame.gameSpecialRules){
+            this.specialRules.push({
+                name: this.deciderGame.gameName,
+                rule: this.deciderGame.gameSpecialRules,
+            })
+        }
         const payload = this.buildPickBanResult();
         await tracePickBanPhase({pickBanPayload: payload, matchId: this.matchObj.match.matchId});
         this.recordPickBanSuccess = await recordPickBanPhase({pickBanResult: payload});
+        this.showSpecialRules = this.specialRules.length > 0;
         this.stepTitle = '';
         this.stepTitleClass = 'pick-style';
         this.stepType = this.currentStep;

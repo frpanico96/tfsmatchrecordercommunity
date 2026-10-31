@@ -86,6 +86,7 @@ public without sharing class PickBanPhaseUtils {
         Match__c match = new Match__c();
         match.Id = result.match.matchId;
         match.Status__c = 'Ready';
+        match.ConfirmedDate__c = System.now();
         
         sobjToUpsert.addAll(steps);
         sobjToUpsert.addAll(matchResults);

@@ -36,9 +36,18 @@
         <apexClass>TfsDto</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <customMetadataTypeAccesses>
+        <enabled>true</enabled>
+        <name>EnvVariable__mdt</name>
+    </customMetadataTypeAccesses>
     <fieldPermissions>
         <editable>false</editable>
         <field>GamePool__c.Order__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Game__c.SpecialRules__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -94,6 +103,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>MatchResult__c.Set__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Match__c.ConfirmedDate__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

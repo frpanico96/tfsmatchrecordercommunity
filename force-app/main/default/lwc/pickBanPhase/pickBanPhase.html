@@ -3,6 +3,7 @@
         <lightning-spinner size="medium" variant="brand" alternative-text="Loading..."></lightning-spinner>
     </template>
     <template lwc:else>
+        <h1 class="step-title slds-text-align_center">{matchObj.match.matchName}</h1>
         <lightning-layout vertical-align="center" horizontal-align="center">
             <lightning-layout-item size="3">
                 <c-player-section player-game-obj={p1}></c-player-section>
@@ -18,6 +19,15 @@
                             <p class="step-title slds-align_absolute-center decider-game slds-var-p-around_xx-small">{deciderGame.gameName}</p>
                         </lightning-layout-item>
                         <lightning-layout-item class="slds-var-p-around_small slds-col slds-size_12-of-12">
+                            <template if:true={showSpecialRules}>
+                                <h1 class="step-title slds-align_absolute-center">Special Rules:</h1>
+                                <template for:each={specialRules} for:item="specialRule">
+                                    <lightning-layout key={specialRule.name} horizontal-align="center" vertical-align="center" class="slds-box slds-grid slds-wrap">
+                                        <p class="step-title slds-col slds-size_12-of-12">{specialRule.name}</p>
+                                        <lightning-formatted-rich-text class="slds-col slds-size_12-of-12" value={specialRule.rule}></lightning-formatted-rich-text>
+                                    </lightning-layout>
+                                </template>
+                            </template>
                             <lightning-button disabled={confirmBtnDisabled} class="slds-var-p-around_small slds-align_absolute-center" label="Confirm" onclick={confirmPickBan}></lightning-button>
                         </lightning-layout-item>
                     </lightning-layout>

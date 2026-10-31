@@ -34,6 +34,7 @@ public with sharing class MatchPickerUtils {
             TfsDto.GamePoolDto gpDto = new TfsDto.GamePoolDto();
             gpDto.gameId = gp.Game__c;
             gpDto.gameName = gp.Game__r.Name;
+            gpDto.gameSpecialRules = gp.Game__r.SpecialRules__c;
             result.gamePool.add(gpDto);
         }
         String matchKey = match.Name + '_' + match.Id;
@@ -41,6 +42,12 @@ public with sharing class MatchPickerUtils {
 
         return result;
 
+    }
+
+    public static Boolean isRecorderActive(){
+
+        EnvVariable__mdt recorderVar = EnvVariable__mdt.getInstance('Match_Recorder');
+        return recorderVar?.IsActive__c;
     }
 
 
@@ -75,6 +82,7 @@ public with sharing class MatchPickerUtils {
             Security.stripInaccessible(AccessType.READABLE, [
                 SELECT Id,
                 Game__r.Name,
+                Game__r.SpecialRules__c,
                 Game__c
                 FROM GamePool__c
                 WHERE Tournament__c = :torunamentId

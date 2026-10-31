@@ -10,5 +10,14 @@ public with sharing class MatchPickerController {
         }
     }
 
+    @AuraEnabled
+    public static Boolean isRecorderActive(){
+        try {
+            return MatchPickerUtils.isRecorderActive();
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
+    }
+
 
 }

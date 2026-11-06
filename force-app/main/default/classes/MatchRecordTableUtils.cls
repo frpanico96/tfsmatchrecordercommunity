@@ -17,6 +17,7 @@ public without sharing class MatchRecordTableUtils {
                 Set__c
                 FROM MatchResult__c
                 WHERE Match__c = :matchId
+                ORDER BY Set__c ASC
             ]);
 
 

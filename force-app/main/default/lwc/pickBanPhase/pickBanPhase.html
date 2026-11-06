@@ -3,7 +3,7 @@
         <lightning-spinner size="medium" variant="brand" alternative-text="Loading..."></lightning-spinner>
     </template>
     <template lwc:else>
-        <h1 class="step-title slds-text-align_center">{matchObj.match.matchName}</h1>
+        <h1 class="step-title slds-text-align_center">{matchObj.match.matchName}<span>: </span><span class="step-title">{matchObj.p1.playerName}</span><span> vs </span><span class="step-title">{matchObj.p2.playerName}</span></h1>
         <lightning-layout vertical-align="center" horizontal-align="center">
             <lightning-layout-item size="3">
                 <c-player-section player-game-obj={p1}></c-player-section>
@@ -17,6 +17,9 @@
                     <lightning-layout horizontal-align="center" vertical-align="center" class="slds-grid slds-wrap">
                         <lightning-layout-item class="slds-var-p-around_small slds-col slds-size_12-of-12">
                             <p class="step-title slds-align_absolute-center decider-game slds-var-p-around_xx-small">{deciderGame.gameName}</p>
+                        </lightning-layout-item>
+                        <lightning-layout-item class="slds-var-p-around_small slds-col slds-size_12-of-12">
+                            <h1 class="slds-align_absolute-center slds-var-p-around_xx-small">{setWinConditionTitle}<span class="step-title">{matchObj.match.setWinCon}</span></h1>
                         </lightning-layout-item>
                         <lightning-layout-item class="slds-var-p-around_small slds-col slds-size_12-of-12">
                             <template if:true={showSpecialRules}>

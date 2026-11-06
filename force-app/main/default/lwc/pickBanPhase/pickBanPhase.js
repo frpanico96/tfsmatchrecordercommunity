@@ -43,6 +43,7 @@ export default class PickBanPhase extends LightningElement {
     recordPickBanSuccess = false;
     confirmBtnDisabled = false;
     showSpecialRules = false;
+    setWinConditionTitle = 'Single games win condition: ';
     
 
     async connectedCallback(){
@@ -91,7 +92,7 @@ export default class PickBanPhase extends LightningElement {
 
     onGameSelected(evt){
         const gameSelected = evt.detail.game;
-        if(gameSelected.gameSpecialRules){
+        if(gameSelected.gameSpecialRules && this.currentStep === 'PICK'){
             this.specialRules.push({
                 name: gameSelected.gameName,
                 rule: gameSelected.gameSpecialRules,
